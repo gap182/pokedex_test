@@ -7,6 +7,8 @@ import 'package:pokemon_test/src/core/theme/colors.dart';
 import 'package:pokemon_test/src/core/theme/type.dart';
 import 'package:pokemon_test/src/core/utils/int_extension.dart';
 import 'package:pokemon_test/src/core/utils/string_extension.dart';
+import 'package:pokemon_test/src/core/utils/types_color.dart';
+import 'package:pokemon_test/src/features/pokedex/presentation/widgets/show_pokemon.dart';
 
 class PokemonGrid extends ConsumerWidget {
   const PokemonGrid({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class PokemonGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pokedex = ref.watch(pokedexProvider);
     return GridView.builder(
+      physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 30),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -24,11 +27,26 @@ class PokemonGrid extends ConsumerWidget {
       itemCount: pokedex.pokemons.length,
       itemBuilder: (context, index) {
         return NeumorphicButton(
-            onPressed: () {},
-            style: const NeumorphicStyle(
-              depth: 10,
-              shadowLightColor: UiColors.backgroundColor,
-            ),
+            onPressed: () {
+              showBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                backgroundColor: Colors.white,
+                builder: (context) => ShowPokemon(
+                  pokemon: pokedex.pokemons[index],
+                ),
+              );
+            },
+            style: NeumorphicStyle(
+                depth: 10,
+                shadowLightColor: UiColors.backgroundColor,
+                color: typesColor[pokedex.pokemons[index].types[0]]
+                    ?.withOpacity(0.2)),
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -62,11 +80,13 @@ class PokemonGrid extends ConsumerWidget {
                     onPressed: () {
                       ref
                           .read(pokedexProvider.notifier)
-                          .onSelectFavorite(index + 1);
+                          .onFavoriteSelection(pokedex.pokemons[index]);
                     },
                     icon: Icon(
                       Icons.favorite,
-                      color: pokedex.pokemons[index].isFavorite
+                      color: pokedex
+                              .getFavoritesId()
+                              .contains(pokedex.pokemons[index].id)
                           ? UiColors.secondaryColor
                           : Colors.white,
                     ),

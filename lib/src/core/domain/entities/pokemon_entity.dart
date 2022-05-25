@@ -9,7 +9,6 @@ class PokemonEntity {
     required this.imageUrl,
     required this.stats,
     required this.types,
-    this.isFavorite = false,
   });
   final int id;
   final String name;
@@ -20,7 +19,6 @@ class PokemonEntity {
   final String imageUrl;
   final List<PokemonStat> stats;
   final List<String> types;
-  final bool isFavorite;
 
   PokemonEntity copyWith({
     int? id,
@@ -32,7 +30,6 @@ class PokemonEntity {
     String? imageUrl,
     List<PokemonStat>? stats,
     List<String>? types,
-    bool? isFavorite,
   }) {
     return PokemonEntity(
       id: id ?? this.id,
@@ -44,7 +41,6 @@ class PokemonEntity {
       imageUrl: imageUrl ?? this.imageUrl,
       stats: stats ?? this.stats,
       types: types ?? this.types,
-      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 
@@ -60,7 +56,6 @@ class PokemonEntity {
     result.addAll({'imageUrl': imageUrl});
     result.addAll({'stats': stats.map((x) => x.toMap()).toList()});
     result.addAll({'types': types});
-    result.addAll({'isFavorite': isFavorite});
 
     return result;
   }
@@ -77,13 +72,12 @@ class PokemonEntity {
       stats: List<PokemonStat>.from(
           map['stats']?.map((x) => PokemonStat.fromMap(x))),
       types: List<String>.from(map['types']),
-      isFavorite: map['isFavorite'] ?? false,
     );
   }
 
   @override
   String toString() {
-    return 'PokemonEntity(id: $id, name: $name, baseExperience: $baseExperience, height: $height, weight: $weight, abilities: $abilities, imageUrl: $imageUrl, stats: $stats, types: $types, isFavorite: $isFavorite)';
+    return 'PokemonEntity(id: $id, name: $name, baseExperience: $baseExperience, height: $height, weight: $weight, abilities: $abilities, imageUrl: $imageUrl, stats: $stats, types: $types)';
   }
 }
 

@@ -35,6 +35,7 @@ class _PokedexPageState extends ConsumerState<PokedexPage> {
   @override
   Widget build(BuildContext context) {
     final pokedex = ref.watch(pokedexProvider);
+
     final topSearchPokemon =
         ref.watch(configProvider.select((value) => value.topLimitPokemons));
 

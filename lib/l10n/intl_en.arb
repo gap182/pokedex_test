@@ -6,5 +6,11 @@
         "placeholders": {
             "number": {}
         }
-    }
+    },
+    "about": "About",
+    "stats": "Stats",
+    "abilities": "Abilities",
+    "height": "Height: ",
+    "weight": "Weight: ",
+    "baseExperience": "Base Experience: "
 }

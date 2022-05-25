@@ -1,52 +1,73 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pokemon_test/src/core/dependencies/dependencies.dart';
 import 'package:pokemon_test/src/core/domain/entities/pokemon_entity.dart';
 import 'package:pokemon_test/src/core/domain/repositories/pokemon_repository.dart';
 import 'package:pokemon_test/src/features/pokedex/presentation/states/pokedex_state.dart';
 
 class PokedexNotifier extends StateNotifier<PokedexState> {
-  PokedexNotifier(this.repository)
+  PokedexNotifier(this.repository, this.ref)
       : super(
           PokedexState(
             pokemons: [],
-            pokedexStatus: PokedexStatus.loading,
+            favoritePokemons: [],
           ),
         );
 
   final PokemonRepository repository;
+  final Ref ref;
 
   void loadPokemonsInfo({int init = 1, required int end}) async {
-    state = state.copyWith(pokemons: []);
     state = state.copyWith(pokedexStatus: PokedexStatus.loading);
+    var box = await Hive.openBox('pokedex');
+    final info = box.get('pokedex');
+    final numberPokemons = ref.read(configProvider).topLimitPokemons;
+
+    if (info == null) {
+      await downloadData(init: init, end: end);
+    } else {
+      state = PokedexState.fromJson(info);
+    }
+
+    if (state.pokemons.length != numberPokemons) {
+      await downloadData(init: init, end: end);
+    }
+
+    box.put('pokedex', state.toJson());
+
+    state = state.copyWith(pokedexStatus: PokedexStatus.done);
+  }
+
+  Future<void> downloadData({int init = 1, required int end}) async {
+    final currentPokemons = <PokemonEntity>[];
     for (int i = init; i <= end; i++) {
       final response = await repository.getPokemonInfo(i.toString());
 
       if (response.response != null && response.error == null) {
-        final currentPokemons = state.pokemons;
         currentPokemons.add(response.response!);
         state = state.copyWith(pokemons: currentPokemons);
       }
     }
-    state = state.copyWith(pokedexStatus: PokedexStatus.done);
+    state = state.copyWith(pokemons: currentPokemons);
   }
 
-  void onSelectFavorite(int id) {
-    final currentPokemons = <PokemonEntity>[];
-    final selectedPokemon =
-        state.pokemons.firstWhere((element) => element.id == id);
+  void onFavoriteSelection(PokemonEntity pokemon) async {
+    var box = await Hive.openBox('pokedex');
 
-    final newPokemon =
-        selectedPokemon.copyWith(isFavorite: !selectedPokemon.isFavorite);
+    final newFavorites = <PokemonEntity>[];
 
-    for (var element in state.pokemons) {
-      if (element.id != id) {
-        currentPokemons.add(element);
-      }
+    for (var element in state.favoritePokemons) {
+      newFavorites.add(element);
     }
 
-    currentPokemons.add(newPokemon);
+    if (state.getFavoritesId().contains(pokemon.id)) {
+      newFavorites.removeWhere((element) => element.id == pokemon.id);
+    } else {
+      newFavorites.add(pokemon);
+    }
 
-    currentPokemons.sort((a, b) => a.id.compareTo(b.id));
+    state = state.copyWith(favoritePokemons: newFavorites);
 
-    state = state.copyWith(pokemons: currentPokemons);
+    box.put('pokedex', state.toJson());
   }
 }

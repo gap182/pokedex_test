@@ -6,6 +6,7 @@ import 'package:pokemon_test/src/core/data/repositories/pokemon_repository_impl.
 import 'package:pokemon_test/src/core/data/services/pokemon_service.dart';
 import 'package:pokemon_test/src/core/domain/repositories/pokemon_repository.dart';
 import 'package:pokemon_test/src/features/pokedex/presentation/controllers/pokedex_controller.dart';
+import 'package:pokemon_test/src/features/pokedex/presentation/controllers/selection_tab_controller.dart';
 import 'package:pokemon_test/src/features/pokedex/presentation/states/pokedex_state.dart';
 
 part 'dependencies_config.dart';

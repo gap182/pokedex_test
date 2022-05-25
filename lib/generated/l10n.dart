@@ -79,6 +79,66 @@ class S {
       args: [number],
     );
   }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stats`
+  String get stats {
+    return Intl.message(
+      'Stats',
+      name: 'stats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abilities`
+  String get abilities {
+    return Intl.message(
+      'Abilities',
+      name: 'abilities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Height: `
+  String get height {
+    return Intl.message(
+      'Height: ',
+      name: 'height',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight: `
+  String get weight {
+    return Intl.message(
+      'Weight: ',
+      name: 'weight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Base Experience: `
+  String get baseExperience {
+    return Intl.message(
+      'Base Experience: ',
+      name: 'baseExperience',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
