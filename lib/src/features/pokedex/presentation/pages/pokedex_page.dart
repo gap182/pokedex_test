@@ -22,12 +22,7 @@ class PokedexPage extends ConsumerStatefulWidget {
 class _PokedexPageState extends ConsumerState<PokedexPage> {
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      final topSearchPokemon = ref.read(configProvider).topLimitPokemons;
-      ref
-          .read(pokedexProvider.notifier)
-          .loadPokemonsInfo(end: topSearchPokemon);
-    });
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {});
 
     super.initState();
   }
@@ -69,9 +64,11 @@ class _PokedexPageState extends ConsumerState<PokedexPage> {
                   ),
                   const PikachuImage(),
                   if (pokedex.pokedexStatus == PokedexStatus.done)
-                    const Expanded(
+                    Expanded(
                       child: SafeArea(
-                        child: PokemonGrid(),
+                        child: PokemonGrid(
+                          pokemonList: pokedex.pokemons,
+                        ),
                       ),
                     ),
                 ],

@@ -139,6 +139,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Favorites`
+  String get favorites {
+    return Intl.message(
+      'Favorites',
+      name: 'favorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ups! we could not find the requested pokemon, try it again`
+  String get notFoundPokemon {
+    return Intl.message(
+      'Ups! we could not find the requested pokemon, try it again',
+      name: 'notFoundPokemon',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

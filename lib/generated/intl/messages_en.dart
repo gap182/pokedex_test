@@ -28,9 +28,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "baseExperience":
             MessageLookupByLibrary.simpleMessage("Base Experience: "),
+        "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
         "height": MessageLookupByLibrary.simpleMessage("Height: "),
         "homeTitle": MessageLookupByLibrary.simpleMessage(
             "What Pokémon are you looking for?"),
+        "notFoundPokemon": MessageLookupByLibrary.simpleMessage(
+            "Ups! we could not find the requested pokemon, try it again"),
         "pokedexTitle": m0,
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "stats": MessageLookupByLibrary.simpleMessage("Stats"),

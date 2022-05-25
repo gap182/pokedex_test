@@ -1,6 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_test/generated/l10n.dart';
+import 'package:pokemon_test/src/core/dependencies/dependencies.dart';
 
 class SearchWidget extends ConsumerWidget {
   const SearchWidget({Key? key}) : super(key: key);
@@ -23,16 +24,26 @@ class SearchWidget extends ConsumerWidget {
                   border: InputBorder.none,
                   hintText: S.of(context).search,
                 ),
-                onChanged: (v) => print(v),
+                onChanged: ref.read(homeProvider.notifier).changeTextToSearch,
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                print("search");
+            Consumer(
+              builder: (context, ref, child) {
+                final textToSearch = ref
+                    .watch(homeProvider.select((value) => value.textToSearch));
+                return GestureDetector(
+                  onTap: () async {
+                    if (textToSearch != null && textToSearch.isNotEmpty) {
+                      ref
+                          .read(homeProvider.notifier)
+                          .searchPokemon(textToSearch.trim());
+                    }
+                  },
+                  child: const Icon(
+                    Icons.search,
+                  ),
+                );
               },
-              child: const Icon(
-                Icons.search,
-              ),
             )
           ],
         ),

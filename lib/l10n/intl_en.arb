@@ -12,5 +12,7 @@
     "abilities": "Abilities",
     "height": "Height: ",
     "weight": "Weight: ",
-    "baseExperience": "Base Experience: "
+    "baseExperience": "Base Experience: ",
+    "favorites": "Favorites",
+    "notFoundPokemon": "Ups! we could not find the requested pokemon, try it again"
 }

@@ -9,3 +9,8 @@ final pokedexProvider =
 final tabSelectionProvider = StateProvider<SelectionTabState>((ref) {
   return SelectionTabState(indexSelected: 0);
 });
+
+final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>((ref) {
+  final repository = ref.watch(pokemonRepositoryImplProvider);
+  return HomeNotifier(repository);
+});
