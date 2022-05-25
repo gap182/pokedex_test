@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokemon_test/src/core/dependencies/dependencies.dart';
 import 'package:pokemon_test/src/core/theme/colors.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -21,6 +22,8 @@ class _SplashPageState extends ConsumerState<SplashPage>
         AnimationController(duration: const Duration(seconds: 3), vsync: this);
     animation =
         Tween<double>(begin: 0.0, end: 200.0).animate(animationController);
+
+    ref.read(configProvider.notifier).loadConfigData();
 
     animation.addListener(() {
       if (animation.isCompleted) {

@@ -1,5 +1,6 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pokemon_test/src/core/theme/colors.dart';
 import 'package:pokemon_test/src/core/theme/type.dart';
 
@@ -9,7 +10,9 @@ class PokedexButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return NeumorphicButton(
-      onPressed: () {},
+      onPressed: () {
+        context.go('/home/pokedex');
+      },
       style: const NeumorphicStyle(
         color: UiColors.secondaryColor,
       ),

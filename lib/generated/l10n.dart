@@ -69,6 +69,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Here you will find the first {number} Pokémon`
+  String pokedexTitle(Object number) {
+    return Intl.message(
+      'Here you will find the first $number Pokémon',
+      name: 'pokedexTitle',
+      desc: '',
+      args: [number],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

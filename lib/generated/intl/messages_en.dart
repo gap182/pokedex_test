@@ -20,10 +20,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(number) => "Here you will find the first ${number} Pokémon";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "homeTitle": MessageLookupByLibrary.simpleMessage(
             "What Pokémon are you looking for?"),
+        "pokedexTitle": m0,
         "search": MessageLookupByLibrary.simpleMessage("Search")
       };
 }

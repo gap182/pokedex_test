@@ -1,0 +1,4 @@
+{
+    "base_url": "https://pokeapi.co/api/v2/",
+    "top_limit_pokemons": 30
+}

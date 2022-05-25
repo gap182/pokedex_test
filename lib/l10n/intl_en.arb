@@ -1,4 +1,10 @@
 {
     "homeTitle": "What Pokémon are you looking for?",
-    "search": "Search"
+    "search": "Search",
+    "pokedexTitle": "Here you will find the first {number} Pokémon",
+    "@pokedexTitle": {
+        "placeholders": {
+            "number": {}
+        }
+    }
 }
