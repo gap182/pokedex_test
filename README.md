@@ -22,9 +22,9 @@ Some of the skills worked on this project:
 
 
 
-## Instruction to install the App
+## Instructions to install the App
 
-To use a pre compiled demo of the app, you could use this apk release file: https://drive.google.com/file/d/1pH0vLNwFsYDfVpgnInEqBqlvxSI37Ydh/view?usp=sharing
+To use a pre compiled demo of the app, you could use this apk release file on an Android device: https://drive.google.com/file/d/1pH0vLNwFsYDfVpgnInEqBqlvxSI37Ydh/view?usp=sharing
 
 To run the app, you have to take into account the next requisites and steps:
 
